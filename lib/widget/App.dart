@@ -1,45 +1,50 @@
 import 'package:flutter/material.dart';
-
 import '../helper/config.dart' as appConfig;
-import './Absence.dart' as widgetAbsence;
-import './Salary.dart' as widgetSalary;
-import './Home.dart' as widgetHome;
 
-class App extends StatelessWidget {
+import './Home.dart' as widgetHome;
+import './Absence.dart' as widgetAbsence;
+import './Salary.dart' as widgetSallary;
+import './Profile.dart' as widgetProfile;
+
+class App extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: appConfig.strings.app_title,
+      title: appConfig.strings.app_name,
       home: Layout(),
+      //NAVIGATION ROUTE
       routes: <String,WidgetBuilder>{
-        'urlSalary':(BuildContext context) => widgetSalary.Salary(),
-        'urlAbsen':(BuildContext context) => widgetAbsence.Absence(),
-        'urlHome' : (BuildContext context) => widgetHome.Home(),
+        '/urlProfile' : (BuildContext context) => widgetProfile.Profile(),
       },
     );
   }
+
 }
 
-class Layout extends StatefulWidget {
-  Layout({Key key}) : super(key: key);
- 
+class Layout extends StatefulWidget{
+  @override
   _LayoutState createState() => _LayoutState();
 }
 
 class _LayoutState extends State<Layout> with SingleTickerProviderStateMixin{
+
   TabController controller;
 
+  @override
+
   void initState(){
-    controller = new TabController(length: 3, vsync: this);
+    controller = new TabController(length: (3), vsync: this);
     super.initState();
   }
-  @override
+
   Widget build(BuildContext context) {
     return new Scaffold(
+      
+      //HEADER
       appBar: new AppBar(
         backgroundColor: appConfig.colors.ColorPrimaryDark,
-        title: Text(appConfig.strings.app_name),
+        title: new Text(appConfig.strings.app_title),
         leading: Container(
           margin: EdgeInsets.all(10.0),
           child: Image.asset(appConfig.images.img_logo),
@@ -49,35 +54,47 @@ class _LayoutState extends State<Layout> with SingleTickerProviderStateMixin{
       //CONTENT
       body: new TabBarView(
         controller: controller,
-        children: <Widget>[
-          new widgetHome.Home(),
-          new widgetAbsence.Absence(),
-          new widgetSalary.Salary()
-        ],
+          children: <Widget>[
+            new widgetHome.Home(),
+            new widgetAbsence.Absence(),
+            widgetSallary.SallaryWidget(),
+          ]
+      ),
+      
+      //FLOATING ACTION BUTTON
+      floatingActionButton: FloatingActionButton(
+          onPressed: (){
+            Navigator.pushNamed(context, '/urlProfile');
+          },
+        tooltip: appConfig.strings.text_profil,
+        child: Icon(appConfig.icons.icon_profile),
+        backgroundColor: appConfig.colors.ColorButton,
       ),
 
+      //BOTTOM NAVIGATION BAR
       bottomNavigationBar: new Material(
         color: appConfig.colors.ColorPrimaryDark,
         child: TabBar(
           controller: controller,
-          tabs: <Widget>[
-            new Tab(
-              icon: Icon(appConfig.icons.icon_home),
-              text: appConfig.strings.text_home,
-            ),
-            new Tab(
-              icon: Icon(appConfig.icons.icon_absence),
-              text: appConfig.strings.text_absence,
-            ),
-            new Tab(
-              icon: Icon(appConfig.icons.icon_sallary),
-              text: appConfig.strings.text_sallary,
-            ),
-          ],
+            tabs: <Widget>[
+              new Tab(
+                icon: new Icon(appConfig.icons.icon_home),
+                text: appConfig.strings.text_home,
+              ),
+              new Tab(
+                icon: new Icon(appConfig.icons.icon_absence),
+                text: appConfig.strings.text_absence,
+              ),
+              new Tab(
+                icon: new Icon(appConfig.icons.icon_sallary),
+                text: appConfig.strings.text_sallary,
+              )
+            ]
         ),
       ),
-    );
-    
-  }
-}
 
+      
+    );
+  }
+  
+}
