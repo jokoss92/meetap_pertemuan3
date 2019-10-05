@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:meetap_sikar/login.dart';
 import '../helper/config.dart' as appConfig;
 
 import './Home.dart' as widgetHome;
 import './Absence.dart' as widgetAbsence;
 import './Salary.dart' as widgetSallary;
 import './Profile.dart' as widgetProfile;
+import './NewEmp.dart' as widgetNewEmp;
+
 
 class App extends StatelessWidget{
   @override
@@ -12,10 +15,12 @@ class App extends StatelessWidget{
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: appConfig.strings.app_name,
-      home: Layout(),
+      home: Login(),
       //NAVIGATION ROUTE
       routes: <String,WidgetBuilder>{
         '/urlProfile' : (BuildContext context) => widgetProfile.Profile(),
+        '/urlNewEmp' : (BuildContext context) => widgetNewEmp.NewEmp(),
+              
       },
     );
   }

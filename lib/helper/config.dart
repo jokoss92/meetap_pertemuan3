@@ -8,9 +8,18 @@ class strings{
  
   static const String text_home = "Home";
   static const String text_absence = "Absence";
+  static const String text_attendance = "Attendance";
   static const String text_sallary = "Sallary";
   static const String text_profil = "Profile";
   static const String text_login = "Login";
+  static const String text_login_hint = "Pin Code";
+  static const base_url = 'http://192.168.1.86/apiSikar/';
+  static const token =
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ3ZWIiOiJodHRwOlwvXC9rYWlsaGFtLmNvbSJ9.cGCF3rTk2yvcvL9JYLgQpeONXDRYq5iC0Hj56ENCnI8';
+  static const imageUrl = 'http://192.168.1.86/apiSikar/images/karyawan/';
+  static const imageUrlEmpty =
+      'https://lejeunefoundation.org/wp-content/uploads/2017/06/male.jpg';
+
 }
 
 class colors{
@@ -138,4 +147,5 @@ class absen{
     }
     return result;
   }
-}
+
+  }
